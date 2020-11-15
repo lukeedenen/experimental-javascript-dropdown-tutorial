@@ -7,4 +7,8 @@ When coding your dropdown menu using JavaScript, there are three main steps, wit
 # Setting up your html
 
 
-1. In your <header> html element. In the header element, you normally, want to have your h1 and your main navigation menu both nested inside you header. However, when coding your dropdown, you want not one, but two seperate main nav elements.
+1. In your <header> html element. In the header element, you normally, want to have your h1 and your main navigation menu both nested inside you header. However, when coding your dropdown, you want not one, but two seperate main nav elements. for now, you can just copy one and paste it right beneath. For now, this is what your page should look like when opened in the browser.
+ 
+ ![multiple-naviagations](/images/multiple-navigations.png)
+
+hello
