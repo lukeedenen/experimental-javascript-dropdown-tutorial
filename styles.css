@@ -25,6 +25,7 @@ body {
 .dropdown__container {
   position: absolute;
   width: 100%;
+  z-index: 1;
   top: 50px;
   right: 0px;
 }
@@ -151,10 +152,6 @@ ul {
 }
 
 @media (min-width: 1200px) {
-  .dropdown__container {
-    display: none;
-  }
-
   .main-nav__dropdown {
     display: none;
   }
