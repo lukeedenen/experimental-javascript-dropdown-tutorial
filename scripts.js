@@ -5,7 +5,7 @@ document.getElementsByClassName("main-nav__toggle")[0].addEventListener("click",
 
   if (checkAria === "false") {
     selectContainer.setAttribute("aria-expanded", true)
-  } else (
+  } else {
     selectContainer.setAttribute("aria-expanded", false)
-  )
+  }
 });
