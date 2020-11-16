@@ -54,4 +54,55 @@ There are a few things you need do that are important to making this function co
 * set main-nav__static to display: block;. This ensure that as long as your screen width is above 1200 pixels, you are undoing the effect that made the static navigation invisiable in the first place.
 
 # Adding your JavaScript
-Your javacsript file with have the extension .js. To link this to your html file, simply copy and paste \<script src="filename.js"\>\</script\> inside your body element. This should be the last element inside the body. when you create your javascript file, you will need to name it the same 
+Your javacsript file with have the extension .js. To link this to your html file, simply copy and paste \<script src="filename.js"\>\</script\> inside your body element. This should be the last element inside the body. 
+
+There are a few things you need to do:
+
+# Adding your Event Listener
+
+The first thing you need to do is add an event listener. The event listener means that your script will “listen” for something specific to happen, and when this specific thing happens, it will trigger a funcution. This is what the event listener should look like. It is important to explain now that JavaScript is case sensetive, so if you use this exact code and it does not seem to be working, you may want double check letter cases
+![event-listener](/images/event-listener.png)
+I want to quickly explain what each part is this is doing.
+
+1. document. My understanding is that this keyword is essentially telling the JavaScript file to search for all necessary information inside a given web page. If you do not start with the word document, the script will not know where to look for any information
+
+2. .getElementsByClassName("main-nav__toggle"). This is telling the javascript that within the document, it needs to search for an element with the class name “main-nav__toggle”. 
+
+3. [0]. When you use a the method .getElementsByClassName, the javascript will create a nodelist. This means that  multiple html elements can share this class name, so the javascript will put them examples of this class name into a list. The first example of this class name is labeled “0”, the second one is labeled ”1”, the third example of this class name is labeled ”2”, and so one. In this example, there is only one html element with that class name, but the javascript will still return a nodelist, and therefore, you still need to specificy which example of this class the script needs to listen too. This is showed with the number value of the methods, which is 0 since this is the only example of this class in the html file, inside squre brackets. There should be no space between the .getElementByClassName() method and the number value of the specific element.
+
+4. .addEventListener("click", function(toggleDropdown) \{…\});. This is telling the JavaScript to listen for something happening inside the classname “main-nav__toggle”, which is inside the document. This is also where you are telling the JavaScript file to listen to something specific, what you are telling it what to listen for, and what you want it to do when it hears it. There are several parts of the event listener.
+* "click". This is the event the script is listening for. there are several possbile values for this, depending on what kind of interaction with this button you want to have. we are using click, because we want the script to activate only when we click the button (as opposed to hovering over it, or something else of that nature).
+* function(toggleDropdown). This is telliing the JavaScript to create a function called toggleDropdown, and to call this function every time it hears the click event.
+* \{…\}. This is this is where you actual function will go. Essentialy, it means that when the event listeners is activated, all the code inside the curly brackets will activate.
+
+# Building your function that is activated by your event listener
+
+There are a few steps for this.
+
+1. Create any variables you will need. A variable is essentially just the information that is going to be applied to your function. to create a variable, you start by calling the keyword “var“, followed the name you are going to give the variable, followed by “=”, followed by the value you are assigning to the variable. I created three different variables for this function:
+* var toggleSwitch = document.getElementsByClassName("main-nav__toggle");. This means you are creating a variable named “toggleSwitch”, and you are assingning it the value of any html element with the classname “main-nav__toggle”.
+* var selectContainer = toggleSwitch[0].closest(".main-nav__dropdown");. this calls the variable “toggleSwitch”, with the nodelist number [0]. .closest(".main-nav__dropdown") means that the variable is calling the closest parent of the main-nav__toggle element with the classname main-nav__dropdown. so, essentially, the closest() method searches the elements nested around (not inside) main-nav__toggle until it finds the one you tell it to look for.
+* var checkAria = selectContainer.getAttribute("aria-expanded");. This means that for the value of this variable, you are calling the variable selectContainer. within the element that it is selecting, you are looking for the value of a specific attribute using the method .getAttribute(). putting aria-expanded inside the perinthises means that this method will return the value of the aria-expanded attribute.
+
+This is what you javacsript should look like now.
+
+![variables](/images/variable.png)
+
+# add an if/else statement
+
+The final step to adding your javascript is to create an if/else statement. this just means that, in layman's terms, if conditions are favorable, the statement will do one thing, and if the conditions are not favorable, the statement will do something else. There are two steps to creating an if/else statement
+
+1. create the if part of the if/else statement. there are three parts to this.
+* Start by calling the keyword “if”. this is just the word that indicates that this is the “if” part of the if/else statement.
+* inside perinthesis, you will add the condition. if this condition is true, a certain script will activate. For this, you are going to check the value of the checkAria variable. That variable will return the current value of the aria-expanded html attribute. Following that variable name, add “===”. This means you will check to see if the checkAria variable has the same value as what is next. The final thing to add to this condition is "false". the word false must be inside quotation marks or this will not work. What this condition means is that if the checkAria variable returns “false”, and therefore is equal to “false”, the condition is true, and the if statement will trigger.
+* The final step for setting up the if part of the if/else statement, is telling the script what to do if the condition is true. you will do this by following the condition by a pair of curly braces, and inside the braces, you will add the code “selectContainer.setAttribute("aria-expanded", true)”. This means that it will call the variable selectContainer. the set-attribute() method lets you change the value of an attribute. to do so, first, you tell the script which attribute you will change the value of, inside quotation marks. in this case, you are changing the value of the aria-expanded attribute. Then, you specify the new value. in this case, the new value that will trigger is true. So, when this activates, the aria-expaanded value in the html document will change to aria-expanded="true". This will automatically trigger the css code, specififying what to do when the aria-expanded value is true.
+At this point, you JavaScript code should look like this
+![if image](/images/if.png)
+
+2. The final step to creating the dropdown is to add the else part of the if/else statement. there are two parts to this.
+* after the closing brace containing the code in the previous step, add the keyword “else”. This means that the following code will trigger when the if condition is not met. essentially, in layman’s terms, this means that if conditions are NOT favorable, the following code will trigger.
+* After the keyword “else”, add some curly braces, indicating what will happen if, again to use layman’s terms, conditions are not favorable. Add the code selectContainer.setAttribute("aria-expanded", false) inside the curly braces. this just means that when this code triggers, you are changing the aria-expanded value to false, reverting the aria-expanded attribute to its original value.
+This is how your completed JavaScript code should look
+![full code](/images/full-code.png)
+
+After you do all of that, your dropdown should open and close when clicking the toggle button
